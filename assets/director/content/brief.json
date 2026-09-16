@@ -1,0 +1,139 @@
+{
+  "version": 4,
+  "profile": "launch",
+  "type": "launch",
+  "audience": "同行、潜在用户、对 AI 编程好奇的人",
+  "platforms": [
+    "xiaohongshu",
+    "bilibili",
+    "douyin",
+    "wechat-channels",
+    "x"
+  ],
+  "formats": [
+    "3x4",
+    "9x16",
+    "16x9"
+  ],
+  "primaryFormat": "3x4",
+  "durationPolicy": "content-led",
+  "narrationRequired": true,
+  "tts": {
+    "provider": "fish",
+    "model": "s2.1-pro-free",
+    "fallbackModels": [
+      "s2.1-pro-free"
+    ],
+    "reference_id": "8fe87e31932f49a896ae27eb334d5274",
+    "speaker": "真人男播客（Fish 公开声线，沉稳自信、清晰讲解技术）；备选见 references/voice.md",
+    "params": {
+      "speed": 1.2,
+      "temperature": 0.6,
+      "top_p": 0.7,
+      "volume": 0
+    },
+    "emotion": {
+      "enabled": true,
+      "default": "[calm]"
+    },
+    "style": "像跟同行讲自己做的东西，克制、准确、自信；demo 处放慢，边界处降速",
+    "timestamps": true
+  },
+  "pacing": {
+    "targetCps": 7.4,
+    "toleranceCps": 0.5,
+    "maxVoiceGapSeconds": 2.5,
+    "maxTrailingSilenceSeconds": 2.5,
+    "leadSeconds": 0.4,
+    "gapPolicy": {
+      "default": 0.45,
+      "min": 0.15,
+      "max": 2.5,
+      "byPunctuation": {
+        "。": 0.45,
+        "？": 0.55,
+        "！": 0.5,
+        "…": 0.6,
+        "，": 0.3
+      },
+      "byBeatKind": {
+        "hook": 0.4,
+        "evidence": 0.9,
+        "turn": 0.6,
+        "chapter": 0.9,
+        "summary": 0.6,
+        "cta": 0.7,
+        "ending": 0.9
+      }
+    },
+    "visualChangeMaxSeconds": 2.5,
+    "enforce": true
+  },
+  "voiceEdit": {
+    "enabled": true,
+    "version": 1,
+    "silenceThresholdDb": -38,
+    "minSilenceSeconds": 0.16,
+    "leadKeepSeconds": 0.06,
+    "tailKeepSeconds": 0.12,
+    "maxInternalPauseSeconds": 0.35,
+    "keepInternalPauseSeconds": 0.22,
+    "jointFadeMs": 2,
+    "edgeFadeMs": 4,
+    "loudness": {
+      "I": -16,
+      "TP": -1.5,
+      "LRA": 8
+    }
+  },
+  "captions": {
+    "style": "block",
+    "maxChars": 16,
+    "maxWeightedChars": 16
+  },
+  "effects": {
+    "preset": "product",
+    "budget": {
+      "slam": 0,
+      "flash": 0,
+      "hitStop": 0,
+      "stamp": 0
+    }
+  },
+  "music": {
+    "required": true,
+    "gain": 0.35,
+    "duck": 0.5,
+    "hitToleranceFrames": 4,
+    "archetype": null,
+    "candidates": 2,
+    "deliverDryVoice": true
+  },
+  "cover": {
+    "provider": "grok",
+    "titleInImage": true,
+    "candidates": 4,
+    "ratios": [
+      "3x4",
+      "9x16",
+      "16x9"
+    ]
+  },
+  "generation": {
+    "provider": "grok-cli",
+    "quality": "quality-first",
+    "generatedMediaRole": "concept-only"
+  },
+  "bannedWordsExtra": [
+    "震撼",
+    "王炸",
+    "炸裂",
+    "家人们",
+    "绝了",
+    "秒杀"
+  ],
+  "review": {
+    "script": true,
+    "openingSeconds": 10
+  }
+}
