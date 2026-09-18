@@ -1,57 +1,31 @@
-# README 视觉维护
+# README 设计与维护
 
-[← 返回首页](../README.md)
+[← 返回项目首页](../README.md)
 
-## 设计方向
+## 一套系列，两种内容
 
-**Obsidian / Editorial Cinema**：黑曜石底色、暖白大字、低饱和紫色、少量鼠尾草绿。画框、光带和时间线呼应视频制作；品牌名保留 `{一起 Vibe} × 秒悟 Meoo`，不修改或冒充官方 Logo。
+首屏直接呈现 `{一起 Vibe}` 与 Meoo 官方字标，猫咪成为主视觉，M 标识用于系列入口。文章转视频采用浅色编辑风格；作品宣传采用深色电影风格。标题、入口、制作流程、案例、开始使用与系列导航保持同一阅读顺序。
 
-首页阅读顺序：主视觉与下载入口 → 真实作品工作流 → 历史案例 → 两种安装入口 → 可复制提示词 → 运行边界与文档。技术细节放在原生折叠区内，入口与关键信息保持可复制的 Markdown / HTML 文字，不烘焙进图片。
+主视觉中的猫咪来自维护者提供的 GIF；没有用生成角色替换官方吉祥物。字标不改形，暗色版用浅色品牌底板保持识别度。
 
-## 素材清单
+## 图片与加载
 
-新素材统一放在 `docs/media/readme/`，直接编辑 SVG 即可，无需安装设计工具或上传字体。
+首页图片全部引用仓库内相对路径，不依赖徽章生成网站、外链字体或 SVG 内嵌远程位图。浏览器在 600px 及以下选用手机重排版，其余使用桌面版。
 
-| 内容 | 桌面版 | 手机竖向重排版 |
-| :--- | :--- | :--- |
-| 首屏主视觉 | `hero.svg` · 1600 × 830 | `hero-mobile.svg` · 800 × 1120 |
-| 五步工作流 | `workflow.svg` · 1600 × 346 | `workflow-mobile.svg` · 800 × 770 |
-| 历史案例封面 | `case-cover.svg` · 1600 × 390 | `case-cover-mobile.svg` · 800 × 604 |
+静态横幅存放在 `docs/media/brand-v2/`。原来的 `docs/media/hero.gif`、旧横幅和案例文件继续保留，没有覆盖或删除。页尾猫咪 GIF 保留原动画；开启减少动态效果时切换为静态帧。
 
-README 使用 `<picture>`，在 600px 及以下的视口选择手机图，普通 `<img>` 作为回退。暗色图有自己的不透明背景和边框，因此不会因 GitHub 明暗主题改变而丢失对比。
+重要操作与功能说明仍是可复制的正文；每张图都有替代文字。图片并不能绕过网络或 GitHub 图片服务故障，因此不承诺所有网络下都一定加载。
 
-主视觉仅有缓慢的光感和时间线位移动画，尊重 `prefers-reduced-motion`。动画不运行时，默认静态画面也包含完整信息。所有图形是流程说明，不是产品实测或 Skill 生成效果证明。
-
-## 为什么更换原来的横幅引用
-
-原 `docs/media/hero.gif` 和其他品牌、案例文件仍保留，没有删除或覆盖。旧首页把 GIF 首屏和徽章交给外链加载；新首页改为轻量、仓库内相对路径的 SVG，不依赖 shields.io 或远程生成横幅服务。历史案例 GIF 移到案例页，首页只加载案例封面。
-
-在本次检查中，旧媒体文件确实存在。没有证据可以把所有人的加载失败都归因于单一问题；网络、GitHub 图片代理和缓存仍可能影响图片加载。仓库内图片用相对路径，也能避免把 README 固定到 `main` 分支。
-
-GitHub 官方依据：
-
-- [相对链接与仓库图片](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
-- [README 中的 picture 元素](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/quickstart-for-writing-on-github)
-- [图片代理与缓存排查](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-anonymized-urls)
-
-## 保持稳定的几条规则
-
-1. 图片用相对路径；从子目录引用时重新计算路径。不要复制当前浏览器的 `blob/main` 页面地址当图片源。
-2. SVG 保持自包含：不用脚本、`foreignObject`、外链图片、远程字体或 `@import`。单张预算不超过 32 KB。
-3. 标题继续用真实中文，系统字体栈保留中文回退；文字加长后检查实际字宽，不靠无限缩小字号解决。
-4. 桌面与手机素材一起改。正文保留图片的文字等价内容和有意义的 `alt`，重要操作不要只出现在图里。
-5. 新增案例必须说明来源及验证范围。不要把装饰画框当作真实产品截图，也不要删掉历史案例的原作者标识。
-
-## 检查与验收
-
-在完整仓库中运行：
+## 维护与验证
 
 ```bash
 python3 scripts/check-readme.py
 ```
 
-检查本地链接、图片的相对路径、图片替代文字、显式页内锚点、SVG XML、体积预算和外部依赖。稀疏检出时，可用 `--known-paths` 提供同版本 Git tree 的逐行路径清单；这只证明文件路径存在，不证明对应媒体可以在线加载。
+检查 README 与相关文档的本地链接、显式锚点、图片替代文字、八张 PNG 的尺寸/校验和/体积，以及官方素材文件和 GIF 解码。该检查不等于在线页面验证，也不验证 Skill 生成视频的效果。
 
-视觉验收应同时检查：1440px 桌面明暗主题、390px 手机，以及 320px 窄屏；确认图片选择、标题换行、正文可读性和横向溢出。动画分别检查默认模式和减少动态效果模式。
+仓库的 README 检查工作流会单独尝试在线 GitHub 的 1440px 明暗主题、390px 与 320px 页面截图，检查图片加载、横向溢出与减少动态效果。实际成功或失败以对应工作流日志和 `hosted-report.json` 为准，不把尝试视为通过。
 
-本次改版的浏览器截图属于本地 Chromium + GitHub 风格 Markdown 预览，不是线上 GitHub 网页截图。没有重新运行视频生成、解码历史 GIF 或重做 Skill 功能验收；原技能版本、代码、Release ZIP 和原媒体保持不变。
+[源素材、许可与重渲染](branding/README.md) · [原技能发布验证](release-verification.md)
+
+本次只调整文档展示、视觉素材及其检查工具。技能版本、运行代码和已发布 Release ZIP 不随本次视觉更新而改变。
